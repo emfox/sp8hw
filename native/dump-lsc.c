@@ -1,4 +1,12 @@
-/* Dump the full lens shading grid from an Intel aiqb (CMC chunk at 0x38). */
+/* Print the lens shading grids of an Intel aiqb.
+ *
+ * Usage: dump-lsc <aiqb> <offset>
+ *
+ * The offset is where the parser's AIQB chunk starts, which is not always the
+ * same byte in the container; aiqb.py locates it and passes it in. Output is
+ * "# grid <w> <h>", then per light source "LS ..." and one "CH <row> <col>"
+ * block per Bayer cell, so aiqb.parse_lsc() can read it back.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

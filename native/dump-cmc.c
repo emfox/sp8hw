@@ -1,4 +1,12 @@
-/* Dump colour matrices and white points from an Intel aiqb. */
+/* Print the colour matrices and white points of an Intel aiqb.
+ *
+ * Usage: dump-cmc <aiqb> <offset>
+ *
+ * The offset is where the parser's AIQB chunk starts, which is not always the
+ * same byte in the container; aiqb.py locates it and passes it in. The last
+ * block of output ("YAML ..." lines) is the machine-readable one the tuning
+ * generator reads: cct, cie x/y, the two gains, nine matrix coefficients.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
