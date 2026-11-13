@@ -57,8 +57,8 @@ points it at dumps from an earlier run.
   extracted OV13858_MSHW0261_TGL.aiqb
   8be033ec…  OV13858_MSHW0261_TGL.aiqb: OK
   …
-  ov13858  6 light sources, 5 shading sets, 369 lines -> out/ov13858.yaml
-  ov5693   6 light sources, 5 shading sets, 376 lines -> out/ov5693.yaml
+  ov13858  6 light sources, 10 shading grids -> 5 sets, 369 lines -> out/ov13858.yaml
+  ov5693   7 light sources, 5 shading grids -> 5 sets, 376 lines -> out/ov5693.yaml
 ```
 
 ## What each file is
@@ -73,7 +73,7 @@ points it at dumps from an earlier run.
 | `lsc.py` | the Lsc section: shading grids resampled and averaged |
 | `tuning.py` | the sensor table, and the order the sections go in |
 | `native/dump-cmc.c` | CMC dumper: white points, gains, matrices |
-| `native/dump-lsc.c` | CMC dumper: the 63x47 shading grids |
+| `native/dump-lsc.c` | LSC dumper: the 63x47 shading grids |
 
 The two C files are thin adapters over `libia_cmc_parser`, the vendor's own
 parser. The offset of the AIQB chunk inside the container is found once, in
