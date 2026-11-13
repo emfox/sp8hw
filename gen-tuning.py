@@ -14,9 +14,23 @@ import subprocess
 import sys
 
 # dump2 is the small dumper that walks the CMC structures with the Intel
-# parser; point IAQ_DUMP2 at it, or put it in PATH.
-DUMP2 = os.environ.get("IAQ_DUMP2") or shutil.which("dump2") or "dump2"
-LIBDIR = os.environ.get("IAQ_LIBDIR", "")
+# parser. Look for it where build-dumps.sh puts it next to the sources, or
+# one level up in bin/ as this tree keeps it. IAQ_DUMP2 / IAQ_LIBDIR win.
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def _first(paths):
+    for p in paths:
+        if p and os.path.exists(p):
+            return p
+    return ""
+
+
+DUMP2 = (_first([os.environ.get("IAQ_DUMP2"), shutil.which("dump2"),
+                 os.path.join(HERE, "dump2"), os.path.join(HERE, "..", "bin", "dump2")])
+        or "dump2")
+LIBDIR = _first([os.environ.get("IAQ_LIBDIR"),
+                 os.path.expanduser("~/src/ipu6-camera-bins/lib")])
 
 
 def find_aiqb(data):
